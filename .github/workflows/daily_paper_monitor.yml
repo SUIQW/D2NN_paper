@@ -1,0 +1,53 @@
+name: Daily D2NN Paper Monitor
+
+on:
+  schedule:
+    # 09:00 Beijing / Singapore time = 01:00 UTC.
+    - cron: "0 1 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  monitor:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Run paper monitor
+        env:
+          SMTP_HOST: ${{ secrets.SMTP_HOST }}
+          SMTP_PORT: ${{ secrets.SMTP_PORT }}
+          SMTP_USER: ${{ secrets.SMTP_USER }}
+          SMTP_PASSWORD: ${{ secrets.SMTP_PASSWORD }}
+          MAIL_FROM: ${{ secrets.MAIL_FROM }}
+          MAIL_TO: ${{ secrets.MAIL_TO }}
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+          OPENAI_MODEL: ${{ secrets.OPENAI_MODEL }}
+          SEMANTIC_SCHOLAR_API_KEY: ${{ secrets.SEMANTIC_SCHOLAR_API_KEY }}
+          CROSSREF_MAILTO: ${{ secrets.CROSSREF_MAILTO }}
+        run: python monitor_papers.py --config config.yaml --seen seen_papers.json
+
+      - name: Commit seen paper state
+        if: success()
+        run: |
+          if ! git diff --quiet -- seen_papers.json; then
+            git config user.name "github-actions[bot]"
+            git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+            git add seen_papers.json
+            git commit -m "Update seen D2NN papers"
+            git push
+          else
+            echo "No seen_papers.json changes to commit."
+          fi

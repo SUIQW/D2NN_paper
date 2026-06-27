@@ -1,0 +1,144 @@
+# Daily D2NN / diffractive neural network paper monitor.
+# You can edit keywords, venues, and scoring weights here without touching code.
+
+timezone: Asia/Shanghai
+lookback_days: 7
+score_threshold: 55
+max_papers_in_email: 20
+
+search:
+  max_results_per_source: 80
+  request_timeout_seconds: 25
+  retries: 3
+  retry_backoff_seconds: 2
+  sources:
+    arxiv: true
+    crossref: true
+    semantic_scholar: true
+
+keywords:
+  - diffractive neural network
+  - diffractive deep neural network
+  - D2NN
+  - diffractive optical neural network
+  - optical neural network
+  - photonic neural network
+  - all-optical neural network
+  - computational diffractive optics
+  - diffractive optical computing
+  - optical computing
+  - metasurface neural network
+  - optical machine learning
+
+# Strong phrases are precise enough to accept with fewer extra constraints.
+strict_keywords:
+  - diffractive neural network
+  - diffractive deep neural network
+  - D2NN
+  - diffractive optical neural network
+  - metasurface neural network
+  - diffractive optical computing
+
+# At least one optical anchor plus one ML/neural term is required when no strict
+# keyword is found. This prevents broad "deep learning" false positives.
+optical_anchor_terms:
+  - diffractive
+  - diffraction
+  - diffractive optics
+  - optical computing
+  - photonic
+  - all-optical
+  - metasurface
+  - phase mask
+  - spatial light modulator
+  - SLM
+  - wavefront
+  - free-space optics
+  - computational diffractive optics
+
+ml_anchor_terms:
+  - neural network
+  - deep neural network
+  - machine learning
+  - deep learning
+  - inference
+  - classifier
+  - optical machine learning
+
+bonus_terms:
+  - optical computing
+  - diffractive optics
+  - metasurface
+  - SLM
+  - spatial light modulator
+  - phase mask
+  - all-optical inference
+  - all-optical
+  - photonic computing
+  - optical neural network
+  - wavefront modulation
+  - on-chip
+  - free-space
+
+negative_terms:
+  - natural language processing
+  - large language model
+  - recommender system
+  - social network
+  - graph neural network
+  - convolutional neural network for medical imaging
+  - remote sensing
+
+high_impact_venues:
+  - Nature
+  - Science
+  - Nature Photonics
+  - Nature Communications
+  - Science Advances
+  - "Light: Science & Applications"
+  - Advanced Photonics
+  - Optica
+  - Photonics Research
+  - ACS Photonics
+  - Laser & Photonics Reviews
+  - eLight
+  - Advanced Science
+  - Advanced Optical Materials
+
+scoring:
+  high_impact_venue: 35
+  title_strict_keyword: 35
+  title_keyword: 18
+  abstract_keyword: 8
+  keyword_field_match: 10
+  optical_context_bonus: 8
+  arxiv_preprint: 3
+  no_optical_anchor_penalty: -45
+  generic_ml_penalty: -35
+
+summary:
+  use_openai: true
+  model_env: OPENAI_MODEL
+  default_model: gpt-4.1-mini
+  max_abstract_chars: 1800
+
+notification:
+  channel: email
+  email:
+    to: sui2324129420@163.com
+    smtp_host: smtp.163.com
+    smtp_port: 465
+    from_env: MAIL_FROM
+    to_env: MAIL_TO
+    smtp_host_env: SMTP_HOST
+    smtp_port_env: SMTP_PORT
+    smtp_user_env: SMTP_USER
+    smtp_password_env: SMTP_PASSWORD
+    use_ssl: true
+    starttls: false
+  # Future channels can reuse the same paper summary payload.
+  webhooks:
+    feishu_url_env: FEISHU_WEBHOOK_URL
+    wecom_url_env: WECOM_WEBHOOK_URL
+    telegram_bot_token_env: TELEGRAM_BOT_TOKEN
+    telegram_chat_id_env: TELEGRAM_CHAT_ID
