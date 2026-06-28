@@ -2,8 +2,9 @@ name: Daily D2NN Paper Monitor
 
 on:
   schedule:
-    # 09:00 Beijing / Singapore time = 01:00 UTC.
-    - cron: "0 1 * * *"
+    # 09:07 Beijing / Singapore time = 01:07 UTC. Avoid minute 0 because
+    # GitHub Actions may delay or drop scheduled jobs during hourly peak load.
+    - cron: "7 1 * * *"
   workflow_dispatch:
 
 permissions:
