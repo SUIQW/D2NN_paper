@@ -1,9 +1,16 @@
 {
   "last_notification": {
-    "date": "2026-07-09",
-    "sent_at": "2026-07-09T13:00:35.123095+08:00"
+    "date": "2026-07-10",
+    "sent_at": "2026-07-10T13:01:05.169284+08:00"
   },
   "seen": {
+    "doi:10.1364/josab.586315": {
+      "date": "2026-07-09",
+      "sent_at": "2026-07-10T13:01:05.169284+08:00",
+      "title": "T-ONN: Talbot propagation as a low-cost layer in free-space optical neural networks",
+      "url": "https://doi.org/10.1364/josab.586315",
+      "venue": "Journal of the Optical Society of America B"
+    },
     "doi:10.1364/ome.604856": {
       "date": "2026-06-26",
       "sent_at": "2026-06-27T18:36:39.154835+08:00",
