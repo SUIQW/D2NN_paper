@@ -1,7 +1,7 @@
 {
   "last_notification": {
-    "date": "2026-07-17",
-    "sent_at": "2026-07-17T12:14:38.385840+08:00"
+    "date": "2026-07-18",
+    "sent_at": "2026-07-18T12:06:59.008606+08:00"
   },
   "seen": {
     "doi:10.1038/s41377-026-02229-1": {
@@ -9,6 +9,13 @@
       "sent_at": "2026-07-15T12:11:31.095359+08:00",
       "title": "Spin-multiplexed point spread function engineering via dielectric metasurface for simultaneous optical differentiation and high-resolution imaging",
       "url": "https://doi.org/10.1038/s41377-026-02229-1",
+      "venue": "Light: Science &amp; Applications"
+    },
+    "doi:10.1038/s41377-026-02314-5": {
+      "date": "2026-07-17",
+      "sent_at": "2026-07-18T12:06:59.008606+08:00",
+      "title": "All-optical computing towards 100-GHz clock rates",
+      "url": "https://doi.org/10.1038/s41377-026-02314-5",
       "venue": "Light: Science &amp; Applications"
     },
     "doi:10.1364/josab.586315": {
